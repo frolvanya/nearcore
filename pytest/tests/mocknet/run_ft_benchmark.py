@@ -41,14 +41,17 @@ def main():
         else:
             nodes.append(n)
 
+    mocknet.stop_nodes(nodes)
     mocknet.clear_data(nodes)
     mocknet.init_validator_key(nodes[0])
 
-    # mocknet.create_and_upload_genesis_file_from_empty_genesis(
-    #     [(node, 1) for node in nodes],
-    #     [],
-    #     chain_id="mocknet",
-    # )
+    mocknet.create_and_upload_genesis_file_from_empty_genesis(
+        [(node, 1) for node in nodes],
+        [],
+        chain_id="mocknet",
+        epoch_length=60 * 60,
+        num_seats=100,
+    )
     mocknet.create_and_upload_config_file_from_default(nodes, "mocknet")
     mocknet.start_nodes(nodes)
     # Start network.

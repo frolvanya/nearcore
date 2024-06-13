@@ -96,7 +96,8 @@ class RemoteNeardRunner:
 
 
 def get_nodes(chain_id, start_height, unique_id):
-    pattern = chain_id + '-' + str(start_height) + '-' + unique_id
+    # pattern = chain_id + '-' + str(start_height) + '-' + unique_id
+    pattern = "crt-benchmark-ft"
     all_nodes = mocknet.get_nodes(pattern=pattern)
     if len(all_nodes) < 1:
         sys.exit(f'no known nodes matching {pattern}')
@@ -121,10 +122,10 @@ def get_nodes(chain_id, start_height, unique_id):
         traffic_generator,
         'cat /proc/mounts | grep "/home/ubuntu/.near" | grep -v "source" | head -n 1 | awk \'{print $2};\''
     ).stdout.strip()
-    if len(traffic_target_home) < 1:
-        sys.exit(
-            f'could not find any mounts in /home/ubuntu/.near on {traffic_generator.instance_name}'
-        )
+    # if len(traffic_target_home) < 1:
+    #     sys.exit(
+    #         f'could not find any mounts in /home/ubuntu/.near on {traffic_generator.instance_name}'
+    #     )
     traffic_runner_home = os.path.join(traffic_target_home, 'neard-runner')
     return NodeHandle(RemoteNeardRunner(traffic_generator, traffic_runner_home),
                       can_validate=False), [
