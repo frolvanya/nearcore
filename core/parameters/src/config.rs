@@ -1,6 +1,6 @@
 //! Settings of the parameters of the runtime.
 use super::parameter_table::InvalidConfigError;
-use crate::config_store::INITIAL_TESTNET_CONFIG;
+use crate::config_store::{INITIAL_TESTNET_CONFIG, INITIAL_BENCHMARKNET_CONFIG};
 use crate::cost::RuntimeFeesConfig;
 use crate::parameter_table::ParameterTable;
 use near_account_id::AccountId;
@@ -43,6 +43,13 @@ impl RuntimeConfig {
             .parse()
             .and_then(|params| RuntimeConfig::new(&params))
             .expect("Failed parsing initial testnet config")
+    }
+
+    pub fn initial_benchmarknet_config() -> RuntimeConfig {
+        INITIAL_BENCHMARKNET_CONFIG
+            .parse()
+            .and_then(|params| RuntimeConfig::new(&params))
+            .expect("Failed parsing initial benchmarknet config")
     }
 
     pub fn test() -> Self {

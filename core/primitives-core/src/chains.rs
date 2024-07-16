@@ -11,3 +11,6 @@ pub const STATELESSNET: &str = "statelessnet";
 
 /// Pre-release testing environment.
 pub const MOCKNET: &str = "mocknet";
+
+/// Benchmarking environment.
+pub const BENCHMARKNET: &str = "benchmarknet";

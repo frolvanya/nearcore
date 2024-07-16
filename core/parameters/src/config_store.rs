@@ -52,7 +52,7 @@ static CONFIG_DIFFS: &[(ProtocolVersion, &str)] = &[
 
 /// Testnet parameters for versions <= 29, which (incorrectly) differed from mainnet parameters
 pub static INITIAL_TESTNET_CONFIG: &str = include_config!("parameters_testnet.yaml");
-
+pub static INITIAL_BENCHMARKNET_CONFIG: &str = include_config!("parameters_benchmarknet.yaml");
 /// Stores runtime config for each protocol version where it was updated.
 #[derive(Clone, Debug)]
 pub struct RuntimeConfigStore {
@@ -135,6 +135,10 @@ impl RuntimeConfigStore {
         match chain_id {
             near_primitives_core::chains::TESTNET => {
                 let genesis_runtime_config = RuntimeConfig::initial_testnet_config();
+                Self::new(Some(&genesis_runtime_config))
+            }
+            near_primitives_core::chains::BENCHMARKNET => {
+                let genesis_runtime_config = RuntimeConfig::initial_benchmarknet_config();
                 Self::new(Some(&genesis_runtime_config))
             }
             _ => Self::new(None),
